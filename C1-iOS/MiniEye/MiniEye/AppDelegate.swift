@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainTabBarVC = BaiscTabBarVC.init()
         var rootVC:UIViewController = mainTabBarVC
         
-      
+
        
 //        if !DataModulesService.shared.initDataModules().isOlderUser {
 //            rootVC = GuidanceViewController()
