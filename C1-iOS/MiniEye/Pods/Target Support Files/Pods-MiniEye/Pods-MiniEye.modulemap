@@ -1,0 +1,6 @@
+framework module Pods_MiniEye {
+  umbrella header "Pods-MiniEye-umbrella.h"
+
+  export *
+  module * { export * }
+}
