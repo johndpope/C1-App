@@ -32,14 +32,20 @@ class AccountUsageViewController: BasicViewController {
         return label
     }()
     
-    lazy var bgBoardView:BasicView = {
-        
-        let view = BasicView.init()
-        view.boardColor(CommonColor.seperatorLine,width:CommonDimension.seperatorheight).cornerRadius(5)
-        return view
+//    lazy var bgBoardView:BasicView = {
+//
+//        let view = BasicView.init()
+//        view.boardColor(CommonColor.seperatorLine,width:CommonDimension.seperatorheight).cornerRadius(5)
+//        return view
+//    }()
+    
+    lazy var welcomeLabel:BasicLabel =  {
+        let label = BasicLabel.initWith(text: "欢迎登录MINIEYE")
+        label.font = CommonFont.title
+        return label;
     }()
     
-    lazy var seperatorView:BasicView = {
+    lazy var seperatorView1:BasicView = {
         
         let view = BasicView.init()
         view.backgroundColor = CommonColor.seperatorLine
@@ -47,7 +53,13 @@ class AccountUsageViewController: BasicViewController {
         return view
     }()
     
-
+    lazy var seperatorView2:BasicView = {
+        
+        let view = BasicView.init()
+        view.backgroundColor = CommonColor.seperatorLine
+        
+        return view
+    }()
    
     lazy var firstTextField:AccountTextField = {
         let textF = AccountTextField.init()
@@ -89,11 +101,11 @@ class AccountUsageViewController: BasicViewController {
     }()
     
     
-    lazy var leftPromptButton:BasicButton = {
+    lazy var loginTypeButton:BasicButton = {
         
         let button = BasicButton.init(type: UIButton.ButtonType.custom)
         button.addTarget(self, action: #selector(viewIsTapped(sender:)), for: UIControl.Event.touchUpInside)
-        button.setTitleColor(CommonColor.black, for: UIControl.State.normal)
+        button.setTitleColor(CommonColor.blue, for: UIControl.State.normal)
         button.titleLabel?.font = CommonFont.content
         
         return button
@@ -175,12 +187,14 @@ class AccountUsageViewController: BasicViewController {
         
         view.backgroundColor = .white
         
-        view.addSubview(bgBoardView)
+//        view.addSubview(bgBoardView)
+        view.addSubview(welcomeLabel)
         view.addSubview(firstTextField)
         view.addSubview(secondTextField)
-        view.addSubview(seperatorView)
+        view.addSubview(seperatorView1)
+        view.addSubview(seperatorView2)
         view.addSubview(excuteButton)
-        view.addSubview(leftPromptButton)
+        view.addSubview(loginTypeButton)
         view.addSubview(rightPromptButton)
         view.addSubview(getVertifyNumButton)
         
@@ -189,7 +203,7 @@ class AccountUsageViewController: BasicViewController {
             title = "密码登录"
             firstTextField.placeholder = "+86 手机号"
             secondTextField.placeholder = "6-16位数字/密码"
-            leftPromptButton.setTitle("短信登录", for: UIControl.State.normal)
+            loginTypeButton.setTitle("短信登录", for: UIControl.State.normal)
             rightPromptButton.setTitle("忘记密码", for: UIControl.State.normal)
             excuteButton.setTitle("登录", for: UIControl.State.normal)
             navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
@@ -202,7 +216,7 @@ class AccountUsageViewController: BasicViewController {
             title = "短信登录"
             firstTextField.placeholder = "+86 手机号"
             secondTextField.placeholder = "请输入验证码"
-            leftPromptButton.setTitle("密码登录", for: UIControl.State.normal)
+            loginTypeButton.setTitle("密码登录", for: UIControl.State.normal)
             excuteButton.setTitle("登录", for: UIControl.State.normal)
             navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
 
@@ -215,19 +229,26 @@ class AccountUsageViewController: BasicViewController {
             secondTextField.placeholder = "请输入验证码"
             excuteButton.setTitle("绑定", for: UIControl.State.normal)
             
-            leftPromptButton.isHidden = true
+            loginTypeButton.isHidden = true
             rightPromptButton.isHidden = true
             
             print_Debug(message: "is bindPhone vc")
             
         }
         
+        welcomeLabel.mas_makeConstraints { (make) in
+            make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
+            make?.top.equalTo()(self.mas_topLayoutGuideBottom)?.offset()(ScreenH * 0.1)
+            make?.height.equalTo()(40)
+        }
+        
         firstTextField.mas_makeConstraints { (make) in
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
             make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
-            make?.top.equalTo()(self.view)?.offset()(100 + NavigationBarH + SafeStatusBarHeight)
+            make?.top.equalTo()(self.welcomeLabel)?.offset()(40)
             make?.height.mas_equalTo()(self.textFieldHeight)
         }
+        
         secondTextField.mas_makeConstraints { (make) in
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
             make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
@@ -235,25 +256,24 @@ class AccountUsageViewController: BasicViewController {
             make?.height.mas_equalTo()(self.textFieldHeight)
         }
         
-        bgBoardView.mas_makeConstraints { (make) in
-            make?.left.right()?.top()?.equalTo()(self.firstTextField)
-            make?.bottom.equalTo()(self.secondTextField)
-        }
+//        bgBoardView.mas_makeConstraints { (make) in
+//            make?.left.right()?.top()?.equalTo()(self.firstTextField)
+//            make?.bottom.equalTo()(self.secondTextField)
+//        }
         
-        seperatorView.mas_makeConstraints { (make) in
-            make?.centerY.equalTo()(self.secondTextField.mas_top)
+        seperatorView1.mas_makeConstraints { (make) in
+            make?.centerY.equalTo()(self.firstTextField.mas_bottom)
             make?.left.right()?.equalTo()(self.firstTextField)
             make?.height.mas_equalTo()(CommonDimension.seperatorheight)
         }
         
-        leftPromptButton.sizeToFit()
-        leftPromptButton.mas_makeConstraints { (make) in
-            make?.left.equalTo()(self.secondTextField)
-            make?.top.equalTo()(self.secondTextField.mas_bottom)
-            make?.height.mas_equalTo()(self.textFieldHeight)
+        seperatorView2.mas_makeConstraints { (make) in
+            make?.centerY.equalTo()(self.secondTextField.mas_bottom)
+            make?.left.right()?.equalTo()(self.firstTextField)
+            make?.height.mas_equalTo()(CommonDimension.seperatorheight)
         }
-        
-         rightPromptButton.sizeToFit()
+
+        rightPromptButton.sizeToFit()
         rightPromptButton.mas_makeConstraints { (make) in
             make?.right.equalTo()(self.secondTextField)
             make?.top.equalTo()(self.secondTextField.mas_bottom)
@@ -264,7 +284,7 @@ class AccountUsageViewController: BasicViewController {
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
             make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
             make?.height.mas_equalTo()(defaultButtonHeight)
-            make?.top.equalTo()(self.leftPromptButton.mas_bottom)?.offset()(100)
+            make?.top.equalTo()(self.rightPromptButton.mas_bottom)?.offset()(30)
         }
         
         getVertifyNumButton.sizeToFit()
@@ -276,54 +296,91 @@ class AccountUsageViewController: BasicViewController {
         
     }
     
+    
     func createSharedView() -> () {
+        let tPlaceHolderView = BasicView()
+        let bPlaceHolderView = BasicView()
+        
+        view.addSubview(tPlaceHolderView)
+        view.addSubview(bPlaceHolderView)
+        
+        let seperatorView:BasicView = {
+            
+            let view = BasicView.init()
+            view.backgroundColor = CommonColor.seperatorLine
+            return view
+        }()
+        
+        
+        let otherLoginLabel:BasicLabel =  {
+            let label = BasicLabel.initWith(text: "其他登录方式")
+            label.font = CommonFont.bdge
+            label.textColor = CommonColor.grayText
+            label.backgroundColor = UIColor.white
+            return label;
+        }()
+        
+        view.addSubview(seperatorView)
+        view.addSubview(otherLoginLabel)
+        
+        seperatorView.mas_makeConstraints { (make) in
+            make?.left.right()?.equalTo()(self.firstTextField)
+            make?.height.mas_equalTo()(CommonDimension.seperatorheight)
+        }
+        
+        otherLoginLabel.sizeToFit()
+        otherLoginLabel.mas_makeConstraints { (make) in
+            make?.center.equalTo()(seperatorView)
+            make?.height.equalTo()(20)
+        }
+        
+        loginTypeButton.sizeToFit()
+        loginTypeButton.mas_makeConstraints { (make) in
+            make?.centerX.equalTo()(otherLoginLabel)
+            make?.top.equalTo()(otherLoginLabel.mas_top)?.offset()(15)
+            make?.height.mas_equalTo()(self.textFieldHeight)
+        }
+
         
         for i in 0..<buttonArray.count {
             let button = buttonArray[i]
             let underlyLabel = underlyViewArray[i]
-            let tPlaceHolderView = BasicView()
-            let bPlaceHolderView = BasicView()
             
             view.addSubview(button)
             view.addSubview(underlyLabel)
-            view.addSubview(tPlaceHolderView)
-            view.addSubview(bPlaceHolderView)
             
             let spacing = (ScreenW - viewWidth * CGFloat(buttonArray.count) - 2 * viewMargin)/CGFloat(buttonArray.count - 1)
             let centerMargin = viewMargin + viewWidth/2 + CGFloat(i) * (viewWidth + spacing)
             
             button.mas_makeConstraints { (make) in
-//                make?.bottom.lessThanOrEqualTo()(self.view)?.offset()(-SafeBottomMargin-30)
-//                make?.top.greaterThanOrEqualTo()(self.excuteButton.mas_bottom)?.offset()(50 )
+                make?.top.equalTo()(self.loginTypeButton.mas_bottom)?.offset()(5)
                 make?.centerX.equalTo()(self.view.mas_left)?.offset()(centerMargin)
                 make?.size.mas_equalTo()(CGSize.init(width: self.viewWidth, height: self.viewWidth))
             }
-            
-            tPlaceHolderView.mas_makeConstraints { (make) in
-                make?.top.equalTo()(self.excuteButton.mas_bottom)
-                make?.bottom.equalTo()(button.mas_top)
-                make?.height.equalTo()(bPlaceHolderView)
-            }
-            
-            bPlaceHolderView.mas_makeConstraints { (make) in
-                make?.top.equalTo()(underlyLabel.mas_bottom)
-                make?.bottom.equalTo()(self.view)
-            }
-            
             
             underlyLabel.sizeToFit()
             underlyLabel.mas_makeConstraints { (make) in
                 make?.centerX.equalTo()(button)
                 make?.top.equalTo()(button.mas_bottom)?.offset()(10)
+                make?.bottom.equalTo()(bPlaceHolderView.mas_top)
             }
         }
         
+        tPlaceHolderView.mas_makeConstraints { (make) in
+            make?.top.equalTo()(self.excuteButton.mas_bottom)
+            make?.height.equalTo()(bPlaceHolderView)
+            make?.bottom.equalTo()(self.loginTypeButton.mas_top)
+        }
+        
+        bPlaceHolderView.mas_makeConstraints { (make) in
+            make?.bottom.equalTo()(self.mas_bottomLayoutGuideTop)
+        }
      
     }
     
     @objc func viewIsTapped(sender:NSObject) {
         
-        if sender == leftPromptButton {
+        if sender == loginTypeButton {
             
             if vcType == .loginUsePassword {
             navigationController?.pushViewController(AccountUsageViewController.init(vcType: AccountUsageViewController.type.loginUseSM), animated: true)
@@ -347,6 +404,10 @@ class AccountUsageViewController: BasicViewController {
         }
         
         print_Debug(message: "viewDebug is tapped", prlogLevel: LogLevel.testClose)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
 }

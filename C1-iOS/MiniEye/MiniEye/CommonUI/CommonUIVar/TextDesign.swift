@@ -20,6 +20,7 @@ struct CommonColor {
     
     static let buttonBG:UIColor = UIColor.init(red: 44/255, green: 52/255, blue: 69/255, alpha: 1)
     static let searchBarBG:UIColor =  UIColor.colorWithHex(hex: 0xF6F5F5)
+    static let blue:UIColor = UIColor.init(red: 62.0 / 255.0, green: 119.0 / 255.0, blue: 255.0 / 255.0, alpha: 1.0)
 
 }
 
