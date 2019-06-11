@@ -91,7 +91,8 @@ extension MyViewController:UITableViewDelegate,UITableViewDataSource{
                 if model.isLogin() {
                     self.navigationController?.pushViewController(UserInfoViewController(), animated: true)
                 }else{
-                    self.navigationController?.pushViewController(AccountUsageViewController.init(vcType: AccountUsageViewController.type.loginUsePassword), animated: true)
+                    self.navigationController?.pushViewController(AccountUsageViewController.init(vcType: AccountUsageViewController.type.loginUseSM), animated: true)
+//                    self.navigationController?.pushViewController(AccountUsageViewController.init(vcType: AccountUsageViewController.type.bindPhone), animated: true)
                 }
             }
             

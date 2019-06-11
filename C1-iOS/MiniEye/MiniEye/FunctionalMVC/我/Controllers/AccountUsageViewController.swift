@@ -11,8 +11,9 @@ import UIKit
 class AccountUsageViewController: BasicViewController {
     
     let textFieldHeight:CGFloat = defaultButtonHeight
+    let smallButtonHeight:CGFloat = 30
     let viewWidth:CGFloat = 60
-    let viewMargin:CGFloat = 60
+    let viewMargin:CGFloat = 30
     
     enum type {
         case loginUsePassword
@@ -43,6 +44,13 @@ class AccountUsageViewController: BasicViewController {
         let label = BasicLabel.initWith(text: "欢迎登录MINIEYE")
         label.font = CommonFont.title
         return label;
+    }()
+    
+    lazy var registTipLabel:BasicLabel = {
+        let label = BasicLabel.initWith(text: "未注册的手机号验证后自动创建MINIEYE账号")
+        label.font = CommonFont.detail
+        label.textColor = CommonColor.grayText
+        return label
     }()
     
     lazy var seperatorView1:BasicView = {
@@ -76,14 +84,32 @@ class AccountUsageViewController: BasicViewController {
     }()
     
     
+    
+    lazy var codeView:CodeView = {
+        let view:CodeView = CodeView(frame: CGRect(x: defaultCellContentHorizitalMargin, y: 0, width: ScreenW - defaultCellContentHorizitalMargin*2, height: self.textFieldHeight))
+        //Change Basic Attributes
+        
+        view.Base.changeViewBasicAttributes(lineColor: CommonColor.seperatorLine, lineInputColor: UIColor.black, cursorColor: UIColor.blue, errorColor: UIColor.red, fontNum: UIFont.systemFont(ofSize: 20), textColor: UIColor.black)
+        view.Base.changeInputNum(num: 4)
+        view.callBacktext = { str in
+            print("code :\(str)")
+            if str == "1234" {
+                
+            } else {
+                view.clearnText(error: "error")
+            }
+        }
+
+        return view
+    }()
+    
     lazy var getVertifyNumButton:RoundRectButton = {
         
         let button = RoundRectButton.init(type: UIButton.ButtonType.custom)
-        button.boardColor(CommonColor.black,width:1).cornerRadius(5)
+        button.boardColor(CommonColor.black,width:1).cornerRadius(10)
         button.setTitle("获取验证码", for: UIControl.State.normal)
         button.setTitleColor(CommonColor.black, for: UIControl.State.normal)
         button.titleLabel?.font = CommonFont.detail
-        button.cornerRadius(5.0)
         button.addTarget(self, action: #selector(viewIsTapped(sender:)), for: UIControl.Event.touchUpInside)
         
         return button
@@ -121,16 +147,16 @@ class AccountUsageViewController: BasicViewController {
         return button
     }()
     
-    lazy var rightBarButton:BasicButton = {
-        
-        let button = BasicButton.init(type: UIButton.ButtonType.custom)
-        button.setTitle("注册", for: UIControl.State.normal)
-        button.addTarget(self, action: #selector(viewIsTapped(sender:)), for: UIControl.Event.touchUpInside)
-        button.setTitleColor(CommonColor.black, for: UIControl.State.normal)
-        button.titleLabel?.font = CommonFont.title
-        
-        return button
-    }()
+//    lazy var rightBarButton:BasicButton = {
+//
+//        let button = BasicButton.init(type: UIButton.ButtonType.custom)
+//        button.setTitle("注册", for: UIControl.State.normal)
+//        button.addTarget(self, action: #selector(viewIsTapped(sender:)), for: UIControl.Event.touchUpInside)
+//        button.setTitleColor(CommonColor.black, for: UIControl.State.normal)
+//        button.titleLabel?.font = CommonFont.title
+//
+//        return button
+//    }()
     
     
     enum buttonName:String {
@@ -189,7 +215,9 @@ class AccountUsageViewController: BasicViewController {
         
 //        view.addSubview(bgBoardView)
         view.addSubview(welcomeLabel)
+        view.addSubview(registTipLabel)
         view.addSubview(firstTextField)
+        view.addSubview(codeView)
         view.addSubview(secondTextField)
         view.addSubview(seperatorView1)
         view.addSubview(seperatorView2)
@@ -201,12 +229,17 @@ class AccountUsageViewController: BasicViewController {
         switch vcType {
         case .loginUsePassword:
             title = "密码登录"
+            registTipLabel.isHidden = true
+            codeView.isHidden = true
+            secondTextField.isHidden = false
+            seperatorView2.isHidden = false
+            welcomeLabel.isHidden = false
             firstTextField.placeholder = "+86 手机号"
             secondTextField.placeholder = "6-16位数字/密码"
             loginTypeButton.setTitle("短信登录", for: UIControl.State.normal)
             rightPromptButton.setTitle("忘记密码", for: UIControl.State.normal)
             excuteButton.setTitle("登录", for: UIControl.State.normal)
-            navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
+//            navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
          
             getVertifyNumButton.isHidden = true
             createSharedView()
@@ -214,17 +247,27 @@ class AccountUsageViewController: BasicViewController {
             
         case .loginUseSM:
             title = "短信登录"
+            registTipLabel.isHidden = false
+            codeView.isHidden = false
+            secondTextField.isHidden = true
+            seperatorView2.isHidden = true
+            welcomeLabel.isHidden = false
             firstTextField.placeholder = "+86 手机号"
             secondTextField.placeholder = "请输入验证码"
             loginTypeButton.setTitle("密码登录", for: UIControl.State.normal)
-            excuteButton.setTitle("登录", for: UIControl.State.normal)
-            navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
+            excuteButton.setTitle("登录/注册", for: UIControl.State.normal)
+//            navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
 
             createSharedView()
             print_Debug(message: "is loginUseSM vc")
             
         case .bindPhone:
             title = "绑定手机"
+            registTipLabel.isHidden = true
+            codeView.isHidden = false
+            secondTextField.isHidden = true
+            seperatorView2.isHidden = true
+            welcomeLabel.isHidden = true
             firstTextField.placeholder = "+86 手机号"
             secondTextField.placeholder = "请输入验证码"
             excuteButton.setTitle("绑定", for: UIControl.State.normal)
@@ -238,18 +281,31 @@ class AccountUsageViewController: BasicViewController {
         
         welcomeLabel.mas_makeConstraints { (make) in
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
-            make?.top.equalTo()(self.mas_topLayoutGuideBottom)?.offset()(ScreenH * 0.1)
-            make?.height.equalTo()(40)
+            make?.top.equalTo()(self.mas_topLayoutGuideBottom)?.offset()(defaultCellContentHorizitalMargin)
+            make?.height.equalTo()(35)
+        }
+        
+        registTipLabel.mas_makeConstraints { (make) in
+            make?.left.equalTo()(self.welcomeLabel)
+            make?.top.equalTo()(self.welcomeLabel.mas_bottom)
+            make?.height.equalTo()(20)
         }
         
         firstTextField.mas_makeConstraints { (make) in
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
             make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
-            make?.top.equalTo()(self.welcomeLabel)?.offset()(40)
+            make?.top.equalTo()(self.welcomeLabel.mas_bottom)?.offset()(defaultCellContentHorizitalMargin)
             make?.height.mas_equalTo()(self.textFieldHeight)
         }
         
         secondTextField.mas_makeConstraints { (make) in
+            make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
+            make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
+            make?.top.equalTo()(self.firstTextField.mas_bottom)
+            make?.height.mas_equalTo()(self.textFieldHeight)
+        }
+        
+        codeView.mas_makeConstraints { (make) in
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
             make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
             make?.top.equalTo()(self.firstTextField.mas_bottom)
@@ -277,20 +333,20 @@ class AccountUsageViewController: BasicViewController {
         rightPromptButton.mas_makeConstraints { (make) in
             make?.right.equalTo()(self.secondTextField)
             make?.top.equalTo()(self.secondTextField.mas_bottom)
-            make?.height.mas_equalTo()(self.textFieldHeight)
+            make?.height.mas_equalTo()(self.smallButtonHeight)
         }
         
         excuteButton.mas_makeConstraints { (make) in
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
             make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
             make?.height.mas_equalTo()(defaultButtonHeight)
-            make?.top.equalTo()(self.rightPromptButton.mas_bottom)?.offset()(30)
+            make?.top.equalTo()(self.rightPromptButton.mas_bottom)?.offset()(defaultCellContentHorizitalMargin)
         }
         
         getVertifyNumButton.sizeToFit()
         getVertifyNumButton.mas_makeConstraints { (make) in
-            make?.centerY.equalTo()(self.secondTextField)
-            make?.right.equalTo()(self.secondTextField)?.offset()(-5)
+            make?.centerY.equalTo()(self.firstTextField)
+            make?.right.equalTo()(self.firstTextField)?.offset()(-5)
             make?.size.mas_equalTo()(self.getVertifyNumButton.bounds.size)
         }
         
@@ -337,8 +393,8 @@ class AccountUsageViewController: BasicViewController {
         loginTypeButton.sizeToFit()
         loginTypeButton.mas_makeConstraints { (make) in
             make?.centerX.equalTo()(otherLoginLabel)
-            make?.top.equalTo()(otherLoginLabel.mas_top)?.offset()(15)
-            make?.height.mas_equalTo()(self.textFieldHeight)
+            make?.top.equalTo()(otherLoginLabel.mas_bottom)
+            make?.height.mas_equalTo()(self.smallButtonHeight)
         }
 
         
@@ -383,25 +439,26 @@ class AccountUsageViewController: BasicViewController {
         if sender == loginTypeButton {
             
             if vcType == .loginUsePassword {
-            navigationController?.pushViewController(AccountUsageViewController.init(vcType: AccountUsageViewController.type.loginUseSM), animated: true)
                 
-            }else if vcType == .loginUseSM {
                 let currentIndex = navigationController?.children.firstIndex(of: self)
                 let forewordVC = navigationController?.children[currentIndex!-1]
                 if forewordVC is AccountUsageViewController {
                     navigationController?.popViewController(animated: true)
                 }
+            }else if vcType == .loginUseSM {
+                navigationController?.pushViewController(AccountUsageViewController.init(vcType: AccountUsageViewController.type.loginUsePassword), animated: true)
             }
             
         }else if sender == rightPromptButton{
             
             navigationController?.pushViewController(AccountModifyViewController.init(vcType: AccountModifyViewController.type.forgetPassword), animated: true)
             
-        }else if sender == rightBarButton {
-            
-            navigationController?.pushViewController(AccountModifyViewController.init(vcType: AccountModifyViewController.type.register), animated: true)
-
         }
+//        else if sender == rightBarButton {
+//
+//            navigationController?.pushViewController(AccountModifyViewController.init(vcType: AccountModifyViewController.type.register), animated: true)
+//
+//        }
         
         print_Debug(message: "viewDebug is tapped", prlogLevel: LogLevel.testClose)
     }

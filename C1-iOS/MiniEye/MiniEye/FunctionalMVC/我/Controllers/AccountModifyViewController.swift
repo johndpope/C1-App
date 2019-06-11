@@ -28,12 +28,12 @@ class AccountModifyViewController: BasicViewController {
         return label
     }()
     
-    lazy var bgBoardView:BasicView = {
-        
-        let view = BasicView.init()
-        view.boardColor(CommonColor.seperatorLine,width:CommonDimension.seperatorheight).cornerRadius(5)
-        return view
-    }()
+//    lazy var bgBoardView:BasicView = {
+//
+//        let view = BasicView.init()
+//        view.boardColor(CommonColor.seperatorLine,width:CommonDimension.seperatorheight).cornerRadius(5)
+//        return view
+//    }()
     
     lazy var firstSeperatorView:BasicView = {
         
@@ -44,10 +44,10 @@ class AccountModifyViewController: BasicViewController {
     }()
     
     lazy var secondSeperatorView:BasicView = {
-        
+
         let view = BasicView.init()
         view.backgroundColor = CommonColor.seperatorLine
-        
+
         return view
     }()
     
@@ -59,13 +59,33 @@ class AccountModifyViewController: BasicViewController {
         return textF
     }()
     
-    lazy var secondTextField:AccountTextField = {
-        let textF = AccountTextField.init()
-        textF.placeholder = "请输入验证码"
-        textF.delegate = self
-        textF.font = CommonFont.detail
-        return textF
+    
+    
+//    lazy var secondTextField:AccountTextField = {
+//        let textF = AccountTextField.init()
+//        textF.placeholder = "请输入验证码"
+//        textF.delegate = self
+//        textF.font = CommonFont.detail
+//        return textF
+//    }()
+    
+    lazy var codeView:CodeView = {
+        let view:CodeView = CodeView(frame: CGRect(x: defaultCellContentHorizitalMargin, y: 0, width: ScreenW - defaultCellContentHorizitalMargin*2, height: self.textFieldHeight))
+        //Change Basic Attributes
+        
+        view.Base.changeViewBasicAttributes(lineColor: CommonColor.seperatorLine, lineInputColor: UIColor.black, cursorColor: UIColor.blue, errorColor: UIColor.red, fontNum: UIFont.systemFont(ofSize: 20), textColor: UIColor.black)
+        view.Base.changeInputNum(num: 4)
+        view.callBacktext = { str in
+            print("code :\(str)")
+            if str == "1234" {
+                
+            } else {
+                view.clearnText(error: "error")
+            }
+        }
+        return view
     }()
+
     
     lazy var thirdTextField:AccountTextField = {
         let textF = AccountTextField.init()
@@ -115,12 +135,10 @@ class AccountModifyViewController: BasicViewController {
     override func configureSubviews() {
         super.configureSubviews()
      
-        
         view.backgroundColor = .white
         
-        view.addSubview(bgBoardView)
         view.addSubview(firstTextField)
-        view.addSubview(secondTextField)
+        view.addSubview(codeView)
         view.addSubview(thirdTextField)
         view.addSubview(firstSeperatorView)
         view.addSubview(secondSeperatorView)
@@ -143,7 +161,8 @@ class AccountModifyViewController: BasicViewController {
             make?.top.equalTo()(self.view)?.offset()(100 + NavigationBarH + SafeStatusBarHeight)
             make?.height.mas_equalTo()(self.textFieldHeight)
         }
-        secondTextField.mas_makeConstraints { (make) in
+        
+        codeView.mas_makeConstraints { (make) in
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
             make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
             make?.top.equalTo()(self.firstTextField.mas_bottom)
@@ -153,23 +172,18 @@ class AccountModifyViewController: BasicViewController {
         thirdTextField.mas_makeConstraints { (make) in
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
             make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
-            make?.top.equalTo()(self.secondTextField.mas_bottom)
+            make?.top.equalTo()(self.codeView.mas_bottom)
             make?.height.mas_equalTo()(self.textFieldHeight)
         }
         
-        bgBoardView.mas_makeConstraints { (make) in
-            make?.left.right()?.top()?.equalTo()(self.firstTextField)
-            make?.bottom.equalTo()(self.thirdTextField)
-        }
-        
         firstSeperatorView.mas_makeConstraints { (make) in
-            make?.centerY.equalTo()(self.secondTextField.mas_top)
+            make?.centerY.equalTo()(self.codeView.mas_top)
             make?.left.right()?.equalTo()(self.firstTextField)
             make?.height.mas_equalTo()(CommonDimension.seperatorheight)
         }
         
         secondSeperatorView.mas_makeConstraints { (make) in
-            make?.centerY.equalTo()(self.thirdTextField.mas_top)
+            make?.centerY.equalTo()(self.thirdTextField.mas_bottom)
             make?.left.right()?.equalTo()(self.firstTextField)
             make?.height.mas_equalTo()(CommonDimension.seperatorheight)
         }
@@ -183,8 +197,8 @@ class AccountModifyViewController: BasicViewController {
         
         getVertifyNumButton.sizeToFit()
         getVertifyNumButton.mas_makeConstraints { (make) in
-            make?.centerY.equalTo()(self.secondTextField)
-            make?.right.equalTo()(self.secondTextField)?.offset()(-5)
+            make?.centerY.equalTo()(self.firstTextField)
+            make?.right.equalTo()(self.firstTextField)?.offset()(-5)
             make?.size.mas_equalTo()(self.getVertifyNumButton.bounds.size)
         }
     }

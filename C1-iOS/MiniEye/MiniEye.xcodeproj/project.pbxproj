@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		070D42B7FDE2EE89A8D104FF /* Pods_MiniEye.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95CCF0E690F2BF66468D8DE4 /* Pods_MiniEye.framework */; };
+		82AB6DA422AF80C800978E1E /* CodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AB6DA222AF80C800978E1E /* CodeView.swift */; };
+		82AB6DA522AF80C800978E1E /* AsunBasicAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AB6DA322AF80C800978E1E /* AsunBasicAttributes.swift */; };
 		F40556EA229CCC350048F9E4 /* LocalPhotosDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40556E9229CCC350048F9E4 /* LocalPhotosDataManager.swift */; };
 		F4055AC3229F8719003C993A /* CityAndDistrictChooseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4055AC2229F8719003C993A /* CityAndDistrictChooseViewController.swift */; };
 		F4067BDC2298E0220023CAB5 /* HomePageHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4067BDB2298E0220023CAB5 /* HomePageHeader.swift */; };
@@ -123,6 +125,8 @@
 
 /* Begin PBXFileReference section */
 		6F56399C2BD0442CEBD92E2B /* Pods-MiniEye.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniEye.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MiniEye/Pods-MiniEye.debug.xcconfig"; sourceTree = "<group>"; };
+		82AB6DA222AF80C800978E1E /* CodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeView.swift; sourceTree = "<group>"; };
+		82AB6DA322AF80C800978E1E /* AsunBasicAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsunBasicAttributes.swift; sourceTree = "<group>"; };
 		84ED66B47A81E2CA00DD675A /* Pods-MiniEye.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniEye.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniEye/Pods-MiniEye.release.xcconfig"; sourceTree = "<group>"; };
 		95CCF0E690F2BF66468D8DE4 /* Pods_MiniEye.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MiniEye.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F40556E9229CCC350048F9E4 /* LocalPhotosDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPhotosDataManager.swift; sourceTree = "<group>"; };
@@ -556,6 +560,8 @@
 				F4340CBE2282FA1700629F5E /* AccountManageView.swift */,
 				F41D2DC2229417A800294879 /* AboutAppHeader.swift */,
 				F4F2358B22941E70002CCB01 /* HelpDeviceTableViewCell.swift */,
+				82AB6DA322AF80C800978E1E /* AsunBasicAttributes.swift */,
+				82AB6DA222AF80C800978E1E /* CodeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -836,6 +842,7 @@
 				F41D2DC3229417A800294879 /* AboutAppHeader.swift in Sources */,
 				F41D2DBA2293F9D400294879 /* AppSettingViewController.swift in Sources */,
 				F415580222A0C7C400C6BF06 /* AccountTextField.swift in Sources */,
+				82AB6DA522AF80C800978E1E /* AsunBasicAttributes.swift in Sources */,
 				F4340CB52282E03C00629F5E /* CommonBlocks.swift in Sources */,
 				F41BF08B2284029D008ED5DF /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 				F4340C9E2282C85C00629F5E /* DeviceHomePageViewController.swift in Sources */,
@@ -858,6 +865,7 @@
 				F4340CA72282D32C00629F5E /* TextDesign.swift in Sources */,
 				F41D2DC12293FB7600294879 /* LazyVar.swift in Sources */,
 				F41075E4228D6A38009294BC /* LocalFileTool.swift in Sources */,
+				82AB6DA422AF80C800978E1E /* CodeView.swift in Sources */,
 				F4340CBB2282F30900629F5E /* BasicTextField.swift in Sources */,
 				F4496E392298E3F200A89F4D /* ActivityViewController.swift in Sources */,
 				F49E2CE1229EAEA800E62C26 /* Optional+Ex.swift in Sources */,
