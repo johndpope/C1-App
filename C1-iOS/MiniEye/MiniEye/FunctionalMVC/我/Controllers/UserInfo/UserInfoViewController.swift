@@ -97,6 +97,7 @@ class UserInfoViewController: BasicViewController {
     
     override func configureSubviews() -> () {
         super.configureSubviews()
+        self.title = "个人信息"
         view.addSubview(tableView)
         view.addSubview(logOutButton)
         
@@ -145,7 +146,6 @@ extension UserInfoViewController:UITableViewDelegate,UITableViewDataSource{
             let storePictureActionInfo = CommonAlertController.actionInfo.init(title: "保存图片", style: UIAlertAction.Style.default, handler:{ (action)in
                 PhotosLibraryTool.shared.saveImageToPhotoLibrary(in: self, imageInfos:[CommonImage.size30AvatarPlaceHolder], albumTitle: "MyTest")
             })
-            
             CommonAlertController.presentedActionSheetStyle(in: self, animated: true, actionInfos: [cancelActionInfo,pictureActionInfo,chooseFromAlbumActionInfo,storePictureActionInfo])
             print_Debug(message: "头像")
         case "昵称":
@@ -189,6 +189,7 @@ extension UserInfoViewController:UITableViewDelegate,UITableViewDataSource{
             
             print_Debug(message: "签名")
         case "修改密码":
+            navigationController?.pushViewController(AccountModifyViewController.init(), animated: true)
             print_Debug(message: "修改密码")
         case "更换手机号":
             print_Debug(message: "更换手机号")

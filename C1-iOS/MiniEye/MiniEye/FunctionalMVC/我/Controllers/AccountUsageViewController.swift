@@ -13,7 +13,8 @@ class AccountUsageViewController: BasicViewController {
     let textFieldHeight:CGFloat = defaultButtonHeight
     let smallButtonHeight:CGFloat = 30
     let viewWidth:CGFloat = 60
-    let viewMargin:CGFloat = 30
+    let viewMargin:CGFloat = 40
+    let codeTimeInterval:Int = 10
     
     enum type {
         case loginUsePassword
@@ -23,6 +24,9 @@ class AccountUsageViewController: BasicViewController {
     
     var vcType:type
     
+    var codeTime:Int
+    
+    var codeTimer:Timer?
     
     lazy  var errorLabel:BasicLabel = {
         let label = BasicLabel.initWith(text: "")
@@ -94,7 +98,8 @@ class AccountUsageViewController: BasicViewController {
         view.callBacktext = { str in
             print("code :\(str)")
             if str == "1234" {
-                
+                UserAccountManager.shared.userAccountData?.telephone = "13812341234"
+                self.navigationController?.popToRootViewController(animated: true)
             } else {
                 view.clearnText(error: "error")
             }
@@ -109,6 +114,7 @@ class AccountUsageViewController: BasicViewController {
         button.boardColor(CommonColor.black,width:1).cornerRadius(10)
         button.setTitle("获取验证码", for: UIControl.State.normal)
         button.setTitleColor(CommonColor.black, for: UIControl.State.normal)
+        button.setTitleColor(CommonColor.grayText, for: UIControl.State.disabled)
         button.titleLabel?.font = CommonFont.detail
         button.addTarget(self, action: #selector(viewIsTapped(sender:)), for: UIControl.Event.touchUpInside)
         
@@ -126,6 +132,13 @@ class AccountUsageViewController: BasicViewController {
         return button
     }()
     
+    lazy var codeTipLabel:BasicLabel = {
+        let label:BasicLabel = BasicLabel.initWith(text: "\(codeTimeInterval)秒后重新获取验证码")
+        label.font = CommonFont.detail
+        label.textColor = CommonColor.grayText
+        label.textAlignment = NSTextAlignment.center
+        return label
+    }()
     
     lazy var loginTypeButton:BasicButton = {
         
@@ -137,15 +150,15 @@ class AccountUsageViewController: BasicViewController {
         return button
     }()
     
-    lazy var rightPromptButton:BasicButton = {
-        
-        let button = BasicButton.init(type: UIButton.ButtonType.custom)
-        button.addTarget(self, action: #selector(viewIsTapped(sender:)), for: UIControl.Event.touchUpInside)
-        button.setTitleColor(CommonColor.black, for: UIControl.State.normal)
-        button.titleLabel?.font = CommonFont.content
-        
-        return button
-    }()
+//    lazy var rightPromptButton:BasicButton = {
+//
+//        let button = BasicButton.init(type: UIButton.ButtonType.custom)
+//        button.addTarget(self, action: #selector(viewIsTapped(sender:)), for: UIControl.Event.touchUpInside)
+//        button.setTitleColor(CommonColor.black, for: UIControl.State.normal)
+//        button.titleLabel?.font = CommonFont.content
+//
+//        return button
+//    }()
     
 //    lazy var rightBarButton:BasicButton = {
 //
@@ -196,6 +209,7 @@ class AccountUsageViewController: BasicViewController {
     
     init(vcType:type) {
         self.vcType = vcType
+        self.codeTime = self.codeTimeInterval
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -206,6 +220,18 @@ class AccountUsageViewController: BasicViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    @objc func codeTimerAction() {
+        if self.codeTime > 0 {
+            self.codeTipLabel.text = "\(self.codeTime)秒后重新获取验证码"
+            self.codeTime -= 1
+        } else {
+            self.codeTipLabel.isHidden = true
+            self.getVertifyNumButton.isEnabled = true
+            self.codeTimer?.invalidate()
+            self.codeTime = codeTimeInterval
+        }
     }
     
     override func configureSubviews() {
@@ -222,9 +248,13 @@ class AccountUsageViewController: BasicViewController {
         view.addSubview(seperatorView1)
         view.addSubview(seperatorView2)
         view.addSubview(excuteButton)
+        view.addSubview(codeTipLabel)
         view.addSubview(loginTypeButton)
-        view.addSubview(rightPromptButton)
+//        view.addSubview(rightPromptButton)
         view.addSubview(getVertifyNumButton)
+        
+        
+        codeTipLabel.isHidden = true
         
         switch vcType {
         case .loginUsePassword:
@@ -234,10 +264,11 @@ class AccountUsageViewController: BasicViewController {
             secondTextField.isHidden = false
             seperatorView2.isHidden = false
             welcomeLabel.isHidden = false
+            excuteButton.isHidden = false
             firstTextField.placeholder = "+86 手机号"
             secondTextField.placeholder = "6-16位数字/密码"
             loginTypeButton.setTitle("短信登录", for: UIControl.State.normal)
-            rightPromptButton.setTitle("忘记密码", for: UIControl.State.normal)
+//            rightPromptButton.setTitle("忘记密码", for: UIControl.State.normal)
             excuteButton.setTitle("登录", for: UIControl.State.normal)
 //            navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBarButton)
          
@@ -252,6 +283,8 @@ class AccountUsageViewController: BasicViewController {
             secondTextField.isHidden = true
             seperatorView2.isHidden = true
             welcomeLabel.isHidden = false
+//            rightPromptButton.isHidden = true
+            excuteButton.isHidden = true
             firstTextField.placeholder = "+86 手机号"
             secondTextField.placeholder = "请输入验证码"
             loginTypeButton.setTitle("密码登录", for: UIControl.State.normal)
@@ -268,12 +301,13 @@ class AccountUsageViewController: BasicViewController {
             secondTextField.isHidden = true
             seperatorView2.isHidden = true
             welcomeLabel.isHidden = true
+            excuteButton.isHidden = true
             firstTextField.placeholder = "+86 手机号"
             secondTextField.placeholder = "请输入验证码"
             excuteButton.setTitle("绑定", for: UIControl.State.normal)
             
             loginTypeButton.isHidden = true
-            rightPromptButton.isHidden = true
+//            rightPromptButton.isHidden = true
             
             print_Debug(message: "is bindPhone vc")
             
@@ -281,7 +315,7 @@ class AccountUsageViewController: BasicViewController {
         
         welcomeLabel.mas_makeConstraints { (make) in
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
-            make?.top.equalTo()(self.mas_topLayoutGuideBottom)?.offset()(defaultCellContentHorizitalMargin)
+            make?.top.equalTo()(self.mas_topLayoutGuideBottom)?.offset()(ScreenH * 0.1)
             make?.height.equalTo()(35)
         }
         
@@ -301,14 +335,14 @@ class AccountUsageViewController: BasicViewController {
         secondTextField.mas_makeConstraints { (make) in
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
             make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
-            make?.top.equalTo()(self.firstTextField.mas_bottom)
+            make?.top.equalTo()(self.firstTextField.mas_bottom)?.offset()(10)
             make?.height.mas_equalTo()(self.textFieldHeight)
         }
         
         codeView.mas_makeConstraints { (make) in
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
             make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
-            make?.top.equalTo()(self.firstTextField.mas_bottom)
+            make?.top.equalTo()(self.firstTextField.mas_bottom)?.offset()(10)
             make?.height.mas_equalTo()(self.textFieldHeight)
         }
         
@@ -329,18 +363,26 @@ class AccountUsageViewController: BasicViewController {
             make?.height.mas_equalTo()(CommonDimension.seperatorheight)
         }
 
-        rightPromptButton.sizeToFit()
-        rightPromptButton.mas_makeConstraints { (make) in
-            make?.right.equalTo()(self.secondTextField)
-            make?.top.equalTo()(self.secondTextField.mas_bottom)
-            make?.height.mas_equalTo()(self.smallButtonHeight)
-        }
+//        rightPromptButton.sizeToFit()
+//        rightPromptButton.mas_makeConstraints { (make) in
+//            make?.right.equalTo()(self.secondTextField)
+//            make?.top.equalTo()(self.secondTextField.mas_bottom)
+//            make?.height.mas_equalTo()(self.smallButtonHeight)
+//        }
         
         excuteButton.mas_makeConstraints { (make) in
             make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
             make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
             make?.height.mas_equalTo()(defaultButtonHeight)
-            make?.top.equalTo()(self.rightPromptButton.mas_bottom)?.offset()(defaultCellContentHorizitalMargin)
+            make?.top.equalTo()(self.seperatorView2.mas_bottom)?.offset()(defaultCellContentHorizitalMargin)
+        }
+        
+        codeTipLabel.sizeToFit()
+        codeTipLabel.mas_makeConstraints { (make) in
+            make?.left.equalTo()(self.view)?.offset()(defaultCellContentHorizitalMargin)
+            make?.right.equalTo()(self.view)?.offset()(-defaultCellContentHorizitalMargin)
+            make?.height.mas_equalTo()(homePageCellHorizitalMargin)
+            make?.top.equalTo()(self.seperatorView2.mas_bottom)?.offset()(defaultCellContentHorizitalMargin)
         }
         
         getVertifyNumButton.sizeToFit()
@@ -393,7 +435,7 @@ class AccountUsageViewController: BasicViewController {
         loginTypeButton.sizeToFit()
         loginTypeButton.mas_makeConstraints { (make) in
             make?.centerX.equalTo()(otherLoginLabel)
-            make?.top.equalTo()(otherLoginLabel.mas_bottom)
+            make?.top.equalTo()(otherLoginLabel.mas_bottom)?.offset()(10)
             make?.height.mas_equalTo()(self.smallButtonHeight)
         }
 
@@ -409,7 +451,7 @@ class AccountUsageViewController: BasicViewController {
             let centerMargin = viewMargin + viewWidth/2 + CGFloat(i) * (viewWidth + spacing)
             
             button.mas_makeConstraints { (make) in
-                make?.top.equalTo()(self.loginTypeButton.mas_bottom)?.offset()(5)
+                make?.top.equalTo()(self.loginTypeButton.mas_bottom)?.offset()(20)
                 make?.centerX.equalTo()(self.view.mas_left)?.offset()(centerMargin)
                 make?.size.mas_equalTo()(CGSize.init(width: self.viewWidth, height: self.viewWidth))
             }
@@ -449,10 +491,19 @@ class AccountUsageViewController: BasicViewController {
                 navigationController?.pushViewController(AccountUsageViewController.init(vcType: AccountUsageViewController.type.loginUsePassword), animated: true)
             }
             
-        }else if sender == rightPromptButton{
-            
-            navigationController?.pushViewController(AccountModifyViewController.init(vcType: AccountModifyViewController.type.forgetPassword), animated: true)
-            
+        } else if sender == getVertifyNumButton {
+            self.codeTime = codeTimeInterval
+            self.getVertifyNumButton.isEnabled = false
+            self.codeTipLabel.isHidden = false
+            self.codeTimer = Timer.init(timeInterval: 1, target: self, selector: #selector(codeTimerAction), userInfo: nil, repeats: true)
+            self.codeTimer!.fireDate = Date.init()
+            self.codeTimer!.fire()
+            RunLoop.current.add(self.codeTimer!, forMode: .common)
+        } else if sender == excuteButton {
+
+            UserAccountManager.shared.userAccountData?.telephone = "13812341234"
+            self.navigationController?.popToRootViewController(animated: true)
+
         }
 //        else if sender == rightBarButton {
 //

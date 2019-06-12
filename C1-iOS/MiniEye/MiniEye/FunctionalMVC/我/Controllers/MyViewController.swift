@@ -49,6 +49,11 @@ class MyViewController: BasicViewController {
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
+    }
+    
     
     override func configureSubviews() -> () {
         super.configureSubviews()
@@ -75,8 +80,11 @@ extension MyViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = MyTableViewHeader.init(frame: CGRect.init(x: 0, y: 0, width: ScreenW, height: 300))
-//        header.model = UserAccountManager.shared.userAccountData
-       let model = UserAccountData.init()
+        
+        if UserAccountManager.shared.userAccountData == nil {
+            UserAccountManager.shared.userAccountData = UserAccountData.init()
+        }
+        let model = UserAccountManager.shared.userAccountData
 //        model.telephone = "10012345678"
         header.model = model
 
@@ -88,7 +96,7 @@ extension MyViewController:UITableViewDelegate,UITableViewDataSource{
             }else if view.viewDescribe() == MyTableViewHeader.ViewDescribe.好友.rawValue {
                 
             }else if view.viewDescribe() == MyTableViewHeader.ViewDescribe.用户.rawValue {
-                if model.isLogin() {
+                if model!.isLogin() {
                     self.navigationController?.pushViewController(UserInfoViewController(), animated: true)
                 }else{
                     self.navigationController?.pushViewController(AccountUsageViewController.init(vcType: AccountUsageViewController.type.loginUseSM), animated: true)
