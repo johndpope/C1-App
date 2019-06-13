@@ -42,6 +42,7 @@
 		F41075E6228D6D1F009294BC /* ModuleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41075E5228D6D1F009294BC /* ModuleProtocol.swift */; };
 		F41075EA228E5A96009294BC /* GuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41075E9228E5A96009294BC /* GuidanceViewController.swift */; };
 		F41075EC228E6D12009294BC /* AppLogData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41075EB228E6D12009294BC /* AppLogData.swift */; };
+		F410FFA722B202B00097A943 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F410FFA622B202B00097A943 /* IJKMediaFramework.framework */; };
 		F415580222A0C7C400C6BF06 /* AccountTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F415580122A0C7C400C6BF06 /* AccountTextField.swift */; };
 		F415580422A0D4A300C6BF06 /* RoundRectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F415580322A0D4A300C6BF06 /* RoundRectButton.swift */; };
 		F41BF08B2284029D008ED5DF /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = F41BF0892284029D008ED5DF /* UINavigationController+FDFullscreenPopGesture.m */; };
@@ -162,6 +163,7 @@
 		F41075E5228D6D1F009294BC /* ModuleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleProtocol.swift; sourceTree = "<group>"; };
 		F41075E9228E5A96009294BC /* GuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidanceViewController.swift; sourceTree = "<group>"; };
 		F41075EB228E6D12009294BC /* AppLogData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogData.swift; sourceTree = "<group>"; };
+		F410FFA622B202B00097A943 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
 		F415580122A0C7C400C6BF06 /* AccountTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTextField.swift; sourceTree = "<group>"; };
 		F415580322A0D4A300C6BF06 /* RoundRectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectButton.swift; sourceTree = "<group>"; };
 		F41BF0882284029C008ED5DF /* MiniEye-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MiniEye-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				070D42B7FDE2EE89A8D104FF /* Pods_MiniEye.framework in Frameworks */,
+				F410FFA722B202B00097A943 /* IJKMediaFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,6 +272,7 @@
 		158990769CB070D6E85BFEC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F410FFA622B202B00097A943 /* IJKMediaFramework.framework */,
 				95CCF0E690F2BF66468D8DE4 /* Pods_MiniEye.framework */,
 			);
 			name = Frameworks;
