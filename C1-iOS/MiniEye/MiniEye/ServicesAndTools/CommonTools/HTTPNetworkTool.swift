@@ -22,7 +22,7 @@ enum NetworkServiceError:Error {
     case decodeResponseStringFailure
 }
 
-typealias networkCompletion = (_ data:[String:Any]?,_ error:Error?,_ response:DataResponse<String>?)->()
+typealias networkCompletion = (_ data:[String:Any]?,_ error:Error?,_ response:DataResponse<Any>?)->()
 typealias dataNetworkCompletion = (_ data:Data?,_ error:Error?,_ response:DataResponse<String>?)->()
 
 class HTTPNetworkTool: BasicTool {
@@ -56,67 +56,65 @@ extension HTTPNetworkTool {
     
     private  func connenctToServer(parameters:[String:Any],with complete:@escaping (networkCompletion)) -> () {
         
-        let headers = ["Content-Type":"application/x-www-form-urlencoded","accept":"application/json","User-Agent":"Anjet charger IOS Version 0.0.1"]
+        let headers = ["Content-Type":"application/x-www-form-urlencoded","accept":"application/json","User-Agent":"MiniEye IOS Version 0.0.1"]
         
-//        setupSessionManagerConfiguration()
-        
-//        Alamofire.request(ProjectSet.API_URL,
-//                          method: .post,
-//                          parameters: parameters,
-//                          encoding: AJTUrlEncoding(),
-//                          headers: headers)
-//            .responseString { (response) in
-//                if response.error != nil || response.value == nil || response.data == nil {
-//                    let error = response.error
-//                    print("[NetWork Service]responseString ,user login error,error=\(String(describing: error))")
-//                    complete(nil,error,nil)
-//                } else {
-//                    let responseValue = response.value
-//                    if let json = AJTResponseDecoding.decodeResponseStr(str: responseValue!) {
-//                        complete(json,nil,response)
-//                    }else {
-//                        if responseValue!.isEmpty {
-//                            complete(nil,NetworkServiceError.responseEmpty,response)
-//                        }else {
-//                            complete(nil,NetworkServiceError.decodeResponseStringFailure,response)
-//                        }
-//                    }
-//                }
-//                print("[NetworkService] responseString complete")
-//        }
+        Alamofire.request(API_URL,
+                          method: .post,
+                          parameters: parameters,
+                          headers: headers)
+            .responseJSON { (response) in
+                if response.error != nil || response.value == nil || response.data == nil {
+                    let error = response.error
+                    print("[NetWork Service]responseJSON ,user login error,error=\(String(describing: error))")
+                    complete(nil,error,nil)
+                } else {
+                    let responseValue = response.value
+                    print("[NetworkService] responseJSON responseValue=\(String(describing: responseValue))")
+                    if let json = responseValue as? [String:Any] {
+                        complete(json,nil,response)
+                    }else {
+                        if responseValue == nil {
+                            complete(nil,NetworkServiceError.responseEmpty,response)
+                        }else {
+                            complete(nil,NetworkServiceError.decodeResponseStringFailure,response)
+                        }
+                    }
+                }
+                print("[NetworkService] responseJSON complete")
+        }
     }
     
-    private  func connenctToServer(parameters:[String:Any],with dataComplete:@escaping (dataNetworkCompletion)) -> () {
-        
-        let headers = ["Content-Type":"application/x-www-form-urlencoded","accept":"application/json","User-Agent":"Anjet charger IOS Version 0.0.1"]
-        
-//        setupSessionManagerConfiguration()
-        
-//        Alamofire.request(ProjectSet.API_URL,
-//                          method: .post,
-//                          parameters: parameters,
-//                          encoding: AJTUrlEncoding(),
-//                          headers: headers)
-//            .responseString { (response) in
-//                if response.error != nil || response.value == nil || response.data == nil {
-//                    let error = response.error
-//                    print("[NetWork Service]responseString ,user login error,error=\(String(describing: error))")
-//                    dataComplete(nil,error,nil)
-//                } else {
-//                    let responseValue = response.value
-//                    if let json = AJTResponseDecoding.decodeResponseStringToData(str: responseValue!) {
-//                        dataComplete(json,nil,response)
-//                    }else {
-//                        if responseValue!.isEmpty {
-//                            dataComplete(nil,NetworkServiceError.responseEmpty,response)
-//                        }else {
-//                            dataComplete(nil,NetworkServiceError.decodeResponseStringFailure,response)
-//                        }
-//                    }
-//                }
-//                print("[NetworkService] responseString complete")
-//        }
-    }
+//    private  func connenctToServer(parameters:[String:Any],with dataComplete:@escaping (dataNetworkCompletion)) -> () {
+//
+//        let headers = ["Content-Type":"application/x-www-form-urlencoded","accept":"application/json","User-Agent":"Anjet charger IOS Version 0.0.1"]
+//
+////        setupSessionManagerConfiguration()
+//
+////        Alamofire.request(ProjectSet.API_URL,
+////                          method: .post,
+////                          parameters: parameters,
+////                          encoding: AJTUrlEncoding(),
+////                          headers: headers)
+////            .responseString { (response) in
+////                if response.error != nil || response.value == nil || response.data == nil {
+////                    let error = response.error
+////                    print("[NetWork Service]responseString ,user login error,error=\(String(describing: error))")
+////                    dataComplete(nil,error,nil)
+////                } else {
+////                    let responseValue = response.value
+////                    if let json = AJTResponseDecoding.decodeResponseStringToData(str: responseValue!) {
+////                        dataComplete(json,nil,response)
+////                    }else {
+////                        if responseValue!.isEmpty {
+////                            dataComplete(nil,NetworkServiceError.responseEmpty,response)
+////                        }else {
+////                            dataComplete(nil,NetworkServiceError.decodeResponseStringFailure,response)
+////                        }
+////                    }
+////                }
+////                print("[NetworkService] responseString complete")
+////        }
+//    }
     
     
 //     func setupSessionManagerConfiguration() -> () {
