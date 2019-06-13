@@ -39,8 +39,12 @@ let ScreenCompareToSix = ScreenW/375.0
 
 struct CommonDimension {
     static let seperatorheight:CGFloat = 0.5
+    static let buttonHeight:CGFloat = 50
+    static let smallCornerRadius:CGFloat = 5
+    static let cellContentHorizitalMargin:CGFloat = 30
 }
 
+//deprecated
 let defaultButtonHeight:CGFloat = 50
 let defaultButtonCornerRadius:CGFloat = 5
 

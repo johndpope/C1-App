@@ -11,7 +11,9 @@ target 'MiniEye' do
   pod 'SVProgressHUD'
   pod 'MBProgressHUD', '~> 1.1.0'
   pod 'Masonry', '~> 1.0.2'     
-  pod 'ZFPlayer', '~> 3.0'
+  pod 'ZFPlayer'
+  pod 'ZFPlayer/ControlView', '~> 3.0'
+  pod 'ZFPlayer/AVPlayer', '~> 3.0'
   pod 'Alamofire'
 #  pod 'GRDB'
 

@@ -15,7 +15,7 @@ class DeviceAdjustViewController: BasicViewController {
         
         let button = BasicButton.init(type: UIButton.ButtonType.custom)
         button.backgroundColor = CommonColor.buttonBG
-        button.setTitle("连接WIFI", for: UIControl.State.normal)
+        button.setTitle("调整成功", for: UIControl.State.normal)
         button.cornerRadius(defaultButtonHeight/2)
         button.addTarget(self, action: #selector(viewIsTapped(sender:)), for: UIControl.Event.touchUpInside)
         
@@ -59,6 +59,7 @@ class DeviceAdjustViewController: BasicViewController {
     @objc func viewIsTapped(sender:NSObject) {
      
         print_Debug(message: "viewDebug is tapped", prlogLevel: LogLevel.testClose)
+        navigationController?.pushViewController(DeviceVediosPlayViewController(), animated: true)
     }
 
 }

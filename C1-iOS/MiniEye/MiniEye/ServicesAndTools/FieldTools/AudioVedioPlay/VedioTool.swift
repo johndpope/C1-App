@@ -13,7 +13,7 @@ import Photos
 class VedioTool: NSObject {
     
     typealias avAssetLoadCompleteHandler = (_ avAsset:AVAsset)->()
-
+    
     static let shared:VedioTool = VedioTool()
     private let loadKeys = ["playable",
                     "hasProtectedContent",

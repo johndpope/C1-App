@@ -59,7 +59,7 @@ class DeviceHomePageViewController: BasicViewController {
 //        } else {
 //            present(WifiConnectGuidanceViewController.init(), animated: true, completion: nil)
 //        }
-        self.navigationController?.pushViewController(DeviceAdjustViewController(), animated: true)
+        self.navigationController?.pushViewController(ChooseVehicleTypeViewController(), animated: true)
 
 //        UIView.animate(withDuration: 0.25, animations: {
 //            self.deviceButton.transform = CGAffineTransform.init(scaleX: 0.9, y: 0.9)

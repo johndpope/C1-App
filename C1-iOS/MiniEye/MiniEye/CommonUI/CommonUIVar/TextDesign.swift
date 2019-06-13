@@ -30,6 +30,7 @@ struct CommonFont {
    static let content:UIFont = UIFont.systemFont(ofSize: 16)
    static let detail:UIFont = UIFont.systemFont(ofSize: 14)
    static let title:UIFont = UIFont.boldSystemFont(ofSize: 18)
+  static let bigTitle:UIFont = UIFont.boldSystemFont(ofSize: 22)
    static let bdge:UIFont = UIFont.systemFont(ofSize: 10)
     
 }

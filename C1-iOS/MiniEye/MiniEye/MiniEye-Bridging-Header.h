@@ -6,4 +6,6 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <SDWebImage/SDWebImage.h>
 #import <SVProgressHUD/SVProgressHUD.h>
-
+#import <ZFPlayer/ZFPlayer.h>
+#import <IJKMediaFramework/IJKMediaFramework.h>
+#import "ZFIJKPlayerManager.h"

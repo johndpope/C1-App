@@ -14,3 +14,7 @@ typealias viewClicked = (_ sender:UIView,_ event:UIControl.Event)->()
 
 //通用的回调block
 typealias commonCompleteBlock = (_ success:Bool,_ error:Error?,_ data:Any?)->()
+
+
+//通用的progress回调block
+typealias commonProgressblock = (_ progress:Float,_ error:Error?)->()

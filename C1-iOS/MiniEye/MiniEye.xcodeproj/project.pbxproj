@@ -43,7 +43,14 @@
 		F41075EA228E5A96009294BC /* GuidanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41075E9228E5A96009294BC /* GuidanceViewController.swift */; };
 		F41075EC228E6D12009294BC /* AppLogData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41075EB228E6D12009294BC /* AppLogData.swift */; };
 		F410FFA722B202B00097A943 /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F410FFA622B202B00097A943 /* IJKMediaFramework.framework */; };
-		F410FFA922B203810097A943 /* AudioVedioPlay in Resources */ = {isa = PBXBuildFile; fileRef = F410FFA822B203810097A943 /* AudioVedioPlay */; };
+		F410FFAB22B2257C0097A943 /* ChooseVehicleTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410FFAA22B2257C0097A943 /* ChooseVehicleTypeViewController.swift */; };
+		F410FFAD22B232340097A943 /* DeviceVediosPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410FFAC22B232330097A943 /* DeviceVediosPlayViewController.swift */; };
+		F410FFB522B234AB0097A943 /* ZFIJKPlayerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F410FFB222B234AA0097A943 /* ZFIJKPlayerManager.m */; };
+		F410FFB622B234AB0097A943 /* VedioTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410FFB322B234AB0097A943 /* VedioTool.swift */; };
+		F410FFB722B234AB0097A943 /* ZFPlayer+MiniEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410FFB422B234AB0097A943 /* ZFPlayer+MiniEye.swift */; };
+		F410FFB922B2350F0097A943 /* DispatchQueue+Ex.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410FFB822B2350F0097A943 /* DispatchQueue+Ex.swift */; };
+		F410FFBB22B235C00097A943 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F410FFBA22B235C00097A943 /* libz.tbd */; };
+		F410FFBD22B235CA0097A943 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F410FFBC22B235CA0097A943 /* libc++.tbd */; };
 		F415580222A0C7C400C6BF06 /* AccountTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F415580122A0C7C400C6BF06 /* AccountTextField.swift */; };
 		F415580422A0D4A300C6BF06 /* RoundRectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F415580322A0D4A300C6BF06 /* RoundRectButton.swift */; };
 		F41BF08B2284029D008ED5DF /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = F41BF0892284029D008ED5DF /* UINavigationController+FDFullscreenPopGesture.m */; };
@@ -165,7 +172,15 @@
 		F41075E9228E5A96009294BC /* GuidanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidanceViewController.swift; sourceTree = "<group>"; };
 		F41075EB228E6D12009294BC /* AppLogData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogData.swift; sourceTree = "<group>"; };
 		F410FFA622B202B00097A943 /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IJKMediaFramework.framework; sourceTree = "<group>"; };
-		F410FFA822B203810097A943 /* AudioVedioPlay */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AudioVedioPlay; sourceTree = "<group>"; };
+		F410FFAA22B2257C0097A943 /* ChooseVehicleTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseVehicleTypeViewController.swift; sourceTree = "<group>"; };
+		F410FFAC22B232330097A943 /* DeviceVediosPlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceVediosPlayViewController.swift; sourceTree = "<group>"; };
+		F410FFB122B234AA0097A943 /* ZFIJKPlayerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFIJKPlayerManager.h; sourceTree = "<group>"; };
+		F410FFB222B234AA0097A943 /* ZFIJKPlayerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFIJKPlayerManager.m; sourceTree = "<group>"; };
+		F410FFB322B234AB0097A943 /* VedioTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VedioTool.swift; sourceTree = "<group>"; };
+		F410FFB422B234AB0097A943 /* ZFPlayer+MiniEye.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ZFPlayer+MiniEye.swift"; sourceTree = "<group>"; };
+		F410FFB822B2350F0097A943 /* DispatchQueue+Ex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DispatchQueue+Ex.swift"; sourceTree = "<group>"; };
+		F410FFBA22B235C00097A943 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		F410FFBC22B235CA0097A943 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		F415580122A0C7C400C6BF06 /* AccountTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTextField.swift; sourceTree = "<group>"; };
 		F415580322A0D4A300C6BF06 /* RoundRectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundRectButton.swift; sourceTree = "<group>"; };
 		F41BF0882284029C008ED5DF /* MiniEye-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MiniEye-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -249,6 +264,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F410FFBD22B235CA0097A943 /* libc++.tbd in Frameworks */,
+				F410FFBB22B235C00097A943 /* libz.tbd in Frameworks */,
 				070D42B7FDE2EE89A8D104FF /* Pods_MiniEye.framework in Frameworks */,
 				F410FFA722B202B00097A943 /* IJKMediaFramework.framework in Frameworks */,
 			);
@@ -274,6 +291,8 @@
 		158990769CB070D6E85BFEC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F410FFBC22B235CA0097A943 /* libc++.tbd */,
+				F410FFBA22B235C00097A943 /* libz.tbd */,
 				F410FFA622B202B00097A943 /* IJKMediaFramework.framework */,
 				95CCF0E690F2BF66468D8DE4 /* Pods_MiniEye.framework */,
 			);
@@ -328,7 +347,7 @@
 		F41075CD228D60EA009294BC /* FieldTools */ = {
 			isa = PBXGroup;
 			children = (
-				F410FFA822B203810097A943 /* AudioVedioPlay */,
+				F410FFB022B234980097A943 /* AudioVedioPlay */,
 				F41075CF228D61A5009294BC /* ThirdPartyLoginTool.swift */,
 				F41075D1228D61B1009294BC /* ThirdPartyShareTool.swift */,
 				F41075D7228D627A009294BC /* RTSPPlayer.swift */,
@@ -361,6 +380,17 @@
 				F4340CA52282D2F200629F5E /* CommonUIVar */,
 			);
 			path = CommonUI;
+			sourceTree = "<group>";
+		};
+		F410FFB022B234980097A943 /* AudioVedioPlay */ = {
+			isa = PBXGroup;
+			children = (
+				F410FFB322B234AB0097A943 /* VedioTool.swift */,
+				F410FFB122B234AA0097A943 /* ZFIJKPlayerManager.h */,
+				F410FFB222B234AA0097A943 /* ZFIJKPlayerManager.m */,
+				F410FFB422B234AB0097A943 /* ZFPlayer+MiniEye.swift */,
+			);
+			path = AudioVedioPlay;
 			sourceTree = "<group>";
 		};
 		F41D2DB22293B16A00294879 /* CommonModel */ = {
@@ -474,10 +504,12 @@
 		F4340C852282C51C00629F5E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F410FFAC22B232330097A943 /* DeviceVediosPlayViewController.swift */,
 				F4340C9D2282C85C00629F5E /* DeviceHomePageViewController.swift */,
 				F4A3205C229FDD8B004003E5 /* WifiConnectGuidanceViewController.swift */,
 				F4A3205E229FFCB3004003E5 /* DeviceAdjustViewController.swift */,
 				F46C2CCC22A4C92800967419 /* ADASSettingViewController.swift */,
+				F410FFAA22B2257C0097A943 /* ChooseVehicleTypeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -589,6 +621,7 @@
 		F4340C902282C51D00629F5E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F410FFB822B2350F0097A943 /* DispatchQueue+Ex.swift */,
 				F41BF08A2284029D008ED5DF /* UINavigationController+FDFullscreenPopGesture.h */,
 				F41BF0892284029D008ED5DF /* UINavigationController+FDFullscreenPopGesture.m */,
 				F4340CA12282CB6D00629F5E /* UIImage+Ex.swift */,
@@ -774,7 +807,6 @@
 				F48CD1592292C2DF00544D8E /* InfoPlist.strings in Resources */,
 				F4340C572282B73B00629F5E /* Main.storyboard in Resources */,
 				F41D2DB62293CDF100294879 /* Assets.xcassets in Resources */,
-				F410FFA922B203810097A943 /* AudioVedioPlay in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,6 +905,7 @@
 				F4340C982282C58000629F5E /* BasicNavigationVC.swift in Sources */,
 				F48CD150229297AD00544D8E /* UserAccountData.swift in Sources */,
 				F406A5B222967581008BD706 /* HelpDetailViewController.swift in Sources */,
+				F410FFAB22B2257C0097A943 /* ChooseVehicleTypeViewController.swift in Sources */,
 				F4340CA72282D32C00629F5E /* TextDesign.swift in Sources */,
 				F41D2DC12293FB7600294879 /* LazyVar.swift in Sources */,
 				F41075E4228D6A38009294BC /* LocalFileTool.swift in Sources */,
@@ -891,6 +924,7 @@
 				F406A5B82296788F008BD706 /* ThirdPartyShareView.swift in Sources */,
 				F4496E4322995AD200A89F4D /* AccountUsageViewController.swift in Sources */,
 				F4A3205D229FDD8B004003E5 /* WifiConnectGuidanceViewController.swift in Sources */,
+				F410FFB722B234AB0097A943 /* ZFPlayer+MiniEye.swift in Sources */,
 				F41075DA228D62C8009294BC /* DeviceManager.swift in Sources */,
 				F41D2DB42293B18400294879 /* CommonModels.swift in Sources */,
 				F4A3206222A00269004003E5 /* AccountModifyViewController.swift in Sources */,
@@ -909,6 +943,7 @@
 				F49E2CDE229E7E1B00E62C26 /* BasicTool.swift in Sources */,
 				F49E2CDA229E792300E62C26 /* LocationTool.swift in Sources */,
 				F41BF090228404C6008ED5DF /* ProgressHUD.swift in Sources */,
+				F410FFB522B234AB0097A943 /* ZFIJKPlayerManager.m in Sources */,
 				F41075D2228D61B1009294BC /* ThirdPartyShareTool.swift in Sources */,
 				F4E58EEB229D0C4700021D6F /* UserInfoChangeViewController.swift in Sources */,
 				F41075EA228E5A96009294BC /* GuidanceViewController.swift in Sources */,
@@ -916,11 +951,14 @@
 				F4496E4122993CF000A89F4D /* BasicTextView.swift in Sources */,
 				F4340CA02282C87D00629F5E /* HomePageViewController.swift in Sources */,
 				F4340C5A2282B73B00629F5E /* MiniEye.xcdatamodeld in Sources */,
+				F410FFB622B234AB0097A943 /* VedioTool.swift in Sources */,
 				F4340CAB2282D7BB00629F5E /* BasicLabel.swift in Sources */,
 				F4340CBD2282F8E500629F5E /* UserInfoViewController.swift in Sources */,
 				F41075D6228D6250009294BC /* DataPersistenceTool.swift in Sources */,
+				F410FFAD22B232340097A943 /* DeviceVediosPlayViewController.swift in Sources */,
 				F41075DC228D6660009294BC /* LogTool.swift in Sources */,
 				F4340C9C2282C84C00629F5E /* MyViewController.swift in Sources */,
+				F410FFB922B2350F0097A943 /* DispatchQueue+Ex.swift in Sources */,
 				F41075EC228E6D12009294BC /* AppLogData.swift in Sources */,
 				F4496E3F2299210D00A89F4D /* VedioPlayCollectionHeader.swift in Sources */,
 				F41075E0228D66C3009294BC /* ToolsModuleManagerService.swift in Sources */,
